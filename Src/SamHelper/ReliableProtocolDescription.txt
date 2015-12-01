@@ -1,0 +1,32 @@
+﻿public enum ReliableDatagramCodes : byte
+{
+	RawDatagram = 0x00,         // => 
+	HandshakeStart = 0x01,      // => reply with MessageStatus
+	MessageStatus = 0x02,       // <=
+	BlockSend = 0x03,           // => reply with BlockConfirmation
+	BlockConfirmation = 0x04,   // <=
+	GetMessageStatus = 0x05,    // => reply with MessageStatus
+	GetProtocolVersion = 0x06,  // => reply with ProtocolVersion
+	ProtocolVersion = 0x07      // <=
+}
+
+RawDatagram:
+	(byte code . uint messageId . uint replyToMessageId . byte messageKind . byte[32] hash . byte[] data)
+	hash - sha256 of (messageId . replyToMessageId . byte messageKind . sha256(data))
+HandshakeStart:
+	(byte code . uint messageId . uint replyToMessageId . byte messageKind . uint totalSize . uint blockSize . byte[32] hash . uint firstBlockSize . byte[] firstBlockData)
+	hash - sha256 of (messageId . replyToMessageId . byte messageKind . sha256(data))
+MessageStatus:
+	(byte code . uint messageId . byte statusCode . uint blocksReceived)
+BlockSend:
+	(byte code . uint messageId . uint blockId . byte[] blockData)
+BlockConfirmation:
+	(byte code . uint messageId . uint blockId)
+GetMessageStatus:
+	(byte code . uint messageId)
+GetProtocolVersion:
+	(byte code)
+ProtocolVersion:
+	(byte code . uint protocolVersion)
+
+Little endian everywhere
