@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BtmI2p.MiscUtil.IO;
 using BtmI2p.MiscUtils;
-using ObjectStateLib;
+using BtmI2p.ObjectStateLib;
 
 namespace BtmI2p.SamHelper
 {
