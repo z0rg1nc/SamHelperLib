@@ -25,33 +25,6 @@ namespace BtmI2p.JsonRpcSamI2pClient
         ReceiveCallbackPing,
         ReceiveResult
     }
-
-    [JsonObject(MemberSerialization.OptIn)]
-    public class JsonRpcError
-    {
-        [JsonProperty("code")]
-        public int ErrorCode { get; set; }
-        [JsonProperty("message")]
-        public string Message { get; set; }
-    }
-
-    [JsonObject(MemberSerialization.OptIn)]
-    public class JsonRpcRequest
-    {
-        [JsonProperty("jsonrpc")]
-        public string JsonRpcVersion
-        {
-            get { return "2.0"; }
-            set { }
-        }
-        [JsonProperty("method")]
-        public string MethodName { get; set; }
-        [JsonProperty("params")]
-        public JArray Parameters { get; set; }
-        [JsonProperty("id")]
-        public int? Id { get; set; }
-    }
-
     
     [AttributeUsage(AttributeTargets.Method)]
     public class JsonSamOperationContractAttribute : Attribute
